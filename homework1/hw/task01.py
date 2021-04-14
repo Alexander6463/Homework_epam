@@ -12,8 +12,4 @@ will be rejected
 
 
 def check_power_of_2(a: int) -> bool:
-    if a == 0:
-        return False
-    while a % 2 != 1:
-        a /= 2
-    return False if a != 1 else True
+    return not (bool(a & (a - 1))) if a >= 1 else False

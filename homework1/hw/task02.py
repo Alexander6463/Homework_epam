@@ -10,9 +10,7 @@ from typing import Sequence
 def check_fibonacci(data: Sequence[int]) -> bool:
     if not data:
         return False
-    if data == [0]:
-        return True
-    elif data == [0, 1]:
+    if data == [0] or data == [0, 1]:
         return True
     else:
         for index in range(2, len(data)):

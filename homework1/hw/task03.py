@@ -12,7 +12,7 @@ with open("some_file.txt") as fi:
 from typing import Tuple
 
 
-def find_maximum_and_minimum(file_name: str) -> Tuple[int, int]:
+def find_max_and_min(file_name: str) -> Tuple[int, int]:
     max_value = int()
     min_value = int()
     with open(file_name, "r") as f:

@@ -134,7 +134,8 @@ dmypy.json
 # pytype static type analyzer
 .pytype/
 .idea/
-
+.idea
+.pytest_cache
 # the rest
 .swp
 

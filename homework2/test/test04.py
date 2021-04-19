@@ -28,7 +28,8 @@ def test_negative():
 
 
 def test_values():
-    """Testing that value1 after cache function is same that value after func"""
+    """Testing that value1 in memory after cache
+    function is not same that value after func"""
 
     def func(a, b):
         return (a ** b) ** 2
@@ -37,7 +38,7 @@ def test_values():
     some = 100, 200
     val_1 = cache_func(*some)
     val_2 = func(*some)
-    assert val_1 == val_2
+    assert val_1 is not val_2
 
 
 def test_other_func():

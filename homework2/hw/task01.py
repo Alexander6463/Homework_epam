@@ -6,6 +6,7 @@ Given a file containing text. Complete using only default collections:
     4) Count every non ascii char
     5) Find most common non ascii char for document
 """
+from string import punctuation
 from typing import List
 
 
@@ -59,13 +60,12 @@ def get_rarest_char(file_path: str) -> str:
 
 
 def count_punctuation_chars(file_path: str) -> int:
-    punctuation_chars = {",", ".", ":", ";", "-", '"', "?", "!", "'"}
     count = 0
     with open(file_path, "r", encoding="unicode-escape") as f:
         text = f.read().split("\n")
     for line in text:
         for char in line:
-            if char in punctuation_chars:
+            if char in punctuation:
                 count += 1
     return count
 

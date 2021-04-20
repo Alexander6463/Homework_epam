@@ -1,3 +1,5 @@
+from itertools import product
+
 from homework2.hw.task03 import combinations
 
 
@@ -42,3 +44,20 @@ def test_three():
         [3, 6, 8],
         [3, 6, 9],
     ]
+
+
+def test_one_lib():
+    """Testing list = [[1, 2], [3, 4]]"""
+    assert combinations([1, 2], [3, 4]) == list(product(*([1, 2], [3, 4])))
+
+
+def test_two_lib():
+    """Testing list = [[1,5], [5,5]]"""
+    assert combinations([1, 5], [5, 5]) == list(product(*([1, 5], [5, 5])))
+
+
+def test_three_lib():
+    """Testing list = [[1,2,3],[4,5,6],[7,8,9]]"""
+    assert combinations([1, 2, 3], [4, 5, 6], [7, 8, 9]) == list(
+        product(*([1, 2, 3], [4, 5, 6], [7, 8, 9]))
+    )

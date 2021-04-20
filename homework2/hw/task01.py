@@ -29,8 +29,7 @@ def get_longest_diverse_words(file_path: str) -> List[str]:
             + " "
         )
     list_words = new_text.split()
-    for word in list_words:
-        set_words.add(word)
+    set_words = set(list_words)
     for word in set_words:
         set_chars = set()
         for char in word:
@@ -39,9 +38,7 @@ def get_longest_diverse_words(file_path: str) -> List[str]:
         dict_words[word] = (len(word), len(set_chars))
     list_words = list(dict_words.items())
     list_words.sort(key=lambda i: (i[1][0], i[1][1]), reverse=True)
-    for element in list_words[0:10]:
-        result_list.append(element[0])
-    return result_list
+    return [word[0] for word in list_words[:10]]
 
 
 def get_rarest_char(file_path: str) -> str:
@@ -55,8 +52,8 @@ def get_rarest_char(file_path: str) -> str:
             else:
                 dict_chars[char] = 1
     list_chars = list(dict_chars.items())
-    list_chars.sort(key=lambda i: i[1])
-    return list_chars[0][0]
+    list_chars.sort(key=lambda i: i[1], reverse=True)
+    return list_chars[-1][0]
 
 
 def count_punctuation_chars(file_path: str) -> int:

@@ -17,8 +17,8 @@ assert combinations([1, 2], [3, 4]) == [
 from typing import Any, List
 
 
-def combinations(*args: List[Any]) -> List[List]:
+def combinations(*args: List[Any]) -> List[tuple]:
     result = [[]]
     for pool in args:
         result = [x + [y] for x in result for y in pool]
-    return result
+    return list(map(tuple, result))

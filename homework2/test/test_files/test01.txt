@@ -2,6 +2,6 @@ this is text for first test. Longest words are abcdefghklemnbd, aretgdswerpasdfg
 akepekgkaseprw, skepwladmede, akepwkfjroplf, swpkfperngsdergac, dorjlwkrogkbmsex, apsekfpemgflaeer, asdlrpwermdckae 
 testing punctuation chars :,...,,,..:;
 rarest symbol is \u00e4
-words for non ascii test n\u00e4hern, Das
+words for non ascii test \u00e4hern, Das
 w\u00fcrde, zur\u00fcck, k\u00f6nnte, 
 da\u00df, n\u00e4hern

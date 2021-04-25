@@ -23,11 +23,13 @@ f()
 '2' """
 
 
+from functools import wraps
 from typing import Callable
 
 
 def cache(times: int) -> Callable:
     def outer(func: Callable) -> Callable:
+        @wraps(func)
         def wrapper(*args: int) -> int:
             key_cache = tuple(args)
             if cache.times == 0:

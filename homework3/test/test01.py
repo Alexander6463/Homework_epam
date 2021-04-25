@@ -13,6 +13,7 @@ def test_working_cache_decorator_with_times_2():
         f()
         for j in range(2):
             assert f() == str(i)
+    sys.stdin.close()
 
 
 def test_working_cache_decorator_with_times_4():
@@ -25,6 +26,7 @@ def test_working_cache_decorator_with_times_4():
         f()
         for j in range(4):
             assert f() == str(i)
+    sys.stdin.close()
 
 
 def test_working_cache_decorator_with_times_1():
@@ -37,3 +39,4 @@ def test_working_cache_decorator_with_times_1():
         f()
         for j in range(1):
             assert f() == str(i)
+    sys.stdin.close()

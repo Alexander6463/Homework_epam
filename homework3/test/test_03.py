@@ -1,4 +1,4 @@
-from homework3.hw.task03 import *
+from homework3.hw.task03 import Filter, make_filter
 
 sample_data = [
     {
@@ -16,7 +16,8 @@ def test_filter_function_even_numbers():
         lambda a: a % 2 == 0, lambda a: a > 0, lambda a: isinstance(a, int)
     )
     assert positive_even.apply(range(100)) == list(
-        filter(lambda a: (a % 2 == 0 and a > 0 and isinstance(a, int)), range(100))
+        filter(lambda a: (a % 2 == 0 and a > 0
+                          and isinstance(a, int)), range(100))
     )
 
 
@@ -25,7 +26,8 @@ def test_filter_function_not_even_numbers():
         lambda a: a % 2 == 1, lambda a: a > 0, lambda a: isinstance(a, int)
     )
     assert positive_non_even.apply(range(100)) == list(
-        filter(lambda a: (a % 2 == 1 and a > 0 and isinstance(a, int)), range(100))
+        filter(lambda a: (a % 2 == 1 and a > 0
+                          and isinstance(a, int)), range(100))
     )
 
 

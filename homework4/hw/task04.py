@@ -1,5 +1,6 @@
 """
-Write a function that takes a number N as an input and returns N FizzBuzz numbers*
+Write a function that takes a number N as an
+input and returns N FizzBuzz numbers*
 Write a doctest for that function.
 Write a detailed instruction how to run doctests**.
 That how first steps for the instruction may look like:
@@ -23,7 +24,8 @@ You will learn:
 ['1', '2', 'Fizz', '4', 'Buzz']
 
 * https://en.wikipedia.org/wiki/Fizz_buzz
-** Энциклопедия профессора Фортрана page 14, 15, "Робот Фортран, чисть картошку!"
+** Энциклопедия профессора Фортрана page 14, 15,
+"Робот Фортран, чисть картошку!"
 """
 from typing import List
 
@@ -39,7 +41,8 @@ def fizzbuzz(n: int) -> List[str]:
     ['1', '2', 'Fizz', '4', 'Buzz', 'Fizz', '7', '8', 'Fizz', 'Buzz']
 
     >>> fizzbuzz(15)
-    ['1', '2', 'Fizz', '4', 'Buzz', 'Fizz', '7', '8', 'Fizz', 'Buzz', '11', 'Fizz', '13', '14', 'Fizz Buzz']
+    ['1', '2', 'Fizz', '4', 'Buzz', 'Fizz', '7', '8', 'Fizz',
+    'Buzz', '11', 'Fizz', '13', '14', 'Fizz Buzz']
 
     """
     result = list()

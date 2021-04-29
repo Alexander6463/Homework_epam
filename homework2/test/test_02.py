@@ -15,7 +15,8 @@ def test_two():
 
 def test_three():
     """Testing [1,1,1,1,1,3,3,3,4,4,4,4,4,5]"""
-    assert major_and_minor_elem([1, 1, 1, 1, 1, 3, 3, 3, 4, 4, 4, 4, 5]) == (1, 5)
+    assert major_and_minor_elem([1, 1, 1, 1, 1, 3,
+                                 3, 3, 4, 4, 4, 4, 5]) == (1, 5)
 
 
 def test_four():

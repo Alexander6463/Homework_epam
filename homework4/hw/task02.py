@@ -29,5 +29,5 @@ def count_dots_on_i(url: str) -> int:
             if char == "i":
                 count += 1
         return count
-    except:
+    except Exception:
         raise ValueError("Unreachable {}".format(url))

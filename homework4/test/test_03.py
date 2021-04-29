@@ -1,5 +1,3 @@
-import sys
-
 from homework4.hw.task03 import my_precious_logger
 
 

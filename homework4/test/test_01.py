@@ -1,5 +1,4 @@
 import os
-import tempfile
 
 import pytest
 
@@ -38,4 +37,7 @@ def test_exception_case(create_and_del_file):
     file = create_and_del_file
     file.write("a")
     file.close()
-    assert read_magic_number(file.name) is ValueError
+    try:
+        read_magic_number(file.name)
+    except Exception:
+        assert ValueError

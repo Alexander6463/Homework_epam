@@ -2,13 +2,15 @@ import sys
 
 from homework3.hw.task01 import cache
 
+path = 'homework3/test/data.txt'
+
 
 def test_working_cache_decorator_with_times_2():
     @cache(times=2)
     def f():
         return input("? ")
 
-    sys.stdin = open("data.txt", "r")
+    sys.stdin = open(path, "r")
     for i in range(1, 3):
         f()
         for j in range(2):
@@ -21,7 +23,7 @@ def test_working_cache_decorator_with_times_4():
     def f():
         return input("? ")
 
-    sys.stdin = open("data.txt", "r")
+    sys.stdin = open(path, "r")
     for i in range(1, 3):
         f()
         for j in range(4):
@@ -34,7 +36,7 @@ def test_working_cache_decorator_with_times_1():
     def f():
         return input("? ")
 
-    sys.stdin = open("data.txt", "r")
+    sys.stdin = open(path, "r")
     for i in range(1, 3):
         f()
         for j in range(1):

@@ -22,12 +22,8 @@ import requests
 
 
 def count_dots_on_i(url: str) -> int:
-    count = 0
     try:
-        resp = requests.get(url)
-        for char in resp.text:
-            if char == "i":
-                count += 1
-        return count
+        resp = requests.get(url).text
+        return resp.count('i')
     except Exception:
         raise ValueError("Unreachable {}".format(url))

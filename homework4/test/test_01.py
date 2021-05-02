@@ -6,38 +6,29 @@ from homework4.hw.task01 import read_magic_number
 
 
 @pytest.fixture()
-def create_and_del_file():
-    f = open("test.txt", "w")
-    yield f
-    os.remove("test.txt")
+def create_and_del_file(tmp_path):
+    def file_factory(body):
+        file_path = os.path.join(tmp_path, 'test')
+        with open(file_path, 'w') as f:
+            f.write(body)
+        return file_path
+    return file_factory
 
 
 def test_number_2_is_positive(create_and_del_file):
-    file = create_and_del_file
-    file.write("2")
-    file.close()
-    assert read_magic_number(file.name)
+    assert read_magic_number(create_and_del_file('2'))
 
 
 def test_number_5_is_negative(create_and_del_file):
-    file = create_and_del_file
-    file.write("5")
-    file.close()
-    assert not read_magic_number(file.name)
+    assert not read_magic_number(create_and_del_file('5'))
 
 
 def test_number_3_is_negative(create_and_del_file):
-    file = create_and_del_file
-    file.write("3")
-    file.close()
-    assert not read_magic_number(file.name)
+    assert not read_magic_number(create_and_del_file('3'))
 
 
 def test_exception_case(create_and_del_file):
-    file = create_and_del_file
-    file.write("a")
-    file.close()
     try:
-        read_magic_number(file.name)
+        read_magic_number(create_and_del_file('a'))
     except Exception:
         assert ValueError

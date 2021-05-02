@@ -29,5 +29,5 @@ repos:
         entry: pytest
         language: python
         pass_filenames: false
-        additional_dependencies: [pre-commit, pytest]
+        additional_dependencies: [pre-commit, pytest, requests]
         always_run: true

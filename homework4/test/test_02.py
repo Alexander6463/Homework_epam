@@ -24,7 +24,7 @@ def test_with_null_i():
 def test_negative_case():
     with patch("requests.get") as fake_get:
         fake_get.return_value.text = 'gig'
-        assert not count_dots_on_i("gggg") == 5
+        assert count_dots_on_i("gggg") != 5
 
 
 def test_exception_case():

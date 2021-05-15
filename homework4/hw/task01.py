@@ -25,15 +25,19 @@ You will learn:
 *** https://docs.python.org/3/tutorial/errors.html#handling-exceptions
 **** https://docs.python.org/3/tutorial/errors.html#raising-exceptions
 """
+import os
 
 
 def read_magic_number(path: str) -> bool:
-    with open(path, "r", encoding="utf-8") as f:
-        try:
-            number = int(f.readline())
-            if 0 <= number < 3:
-                return True
-            else:
-                return False
-        except Exception:
-            raise ValueError
+    if os.path.isfile(path):
+        with open(path, "r", encoding="utf-8") as f:
+            try:
+                number = int(f.readline())
+                if 0 <= number < 3:
+                    return True
+                else:
+                    return False
+            except ValueError:
+                raise ValueError
+    else:
+        raise FileExistsError

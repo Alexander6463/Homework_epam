@@ -30,5 +30,12 @@ def test_number_3_is_negative(create_and_del_file):
 def test_exception_case(create_and_del_file):
     try:
         read_magic_number(create_and_del_file('a'))
-    except Exception:
+    except ValueError:
         assert ValueError
+
+
+def test_file_is_not_exist():
+    try:
+        read_magic_number('lalal')
+    except FileExistsError:
+        assert FileExistsError

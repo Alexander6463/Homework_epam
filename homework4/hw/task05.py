@@ -26,6 +26,3 @@ def fizzbuzz(n: int) -> Generator:
         lst[i] = "fizz buzz"
     for i in lst:
         yield i
-
-
-print(list(fizzbuzz(20)))

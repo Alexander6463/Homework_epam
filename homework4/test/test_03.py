@@ -16,10 +16,10 @@ def test_std_out_positive(capsys):
 def test_std_err_negative(capsys):
     my_precious_logger("There is no errors")
     captured = capsys.readouterr()
-    assert not captured.err == "There is no errors"
+    assert captured.err != "There is no errors"
 
 
 def test_std_out_negative(capsys):
     my_precious_logger("error: ValueError Exception")
     captured = capsys.readouterr()
-    assert not captured.out == "error: ValueError Exception"
+    assert captured.out != "error: ValueError Exception"

@@ -28,14 +28,10 @@ def test_number_3_is_negative(create_and_del_file):
 
 
 def test_exception_case(create_and_del_file):
-    try:
+    with pytest.raises(ValueError):
         read_magic_number(create_and_del_file('a'))
-    except ValueError:
-        assert ValueError
 
 
 def test_file_is_not_exist():
-    try:
+    with pytest.raises(FileExistsError):
         read_magic_number('lalal')
-    except FileExistsError:
-        assert FileExistsError

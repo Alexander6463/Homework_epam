@@ -29,15 +29,14 @@ import os
 
 
 def read_magic_number(path: str) -> bool:
-    if os.path.isfile(path):
-        with open(path, "r", encoding="utf-8") as f:
-            try:
-                number = int(f.readline())
-                if 0 <= number < 3:
-                    return True
-                else:
-                    return False
-            except ValueError:
-                raise ValueError
-    else:
+    if not os.path.isfile(path):
         raise FileExistsError
+    with open(path, "r", encoding="utf-8") as f:
+        try:
+            number = int(f.readline())
+            if 0 <= number < 3:
+                return True
+            else:
+                return False
+        except ValueError:
+            raise ValueError

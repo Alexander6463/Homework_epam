@@ -1,5 +1,7 @@
 from unittest.mock import patch
 
+import pytest
+
 from homework4.hw.task02 import count_dots_on_i
 
 
@@ -28,9 +30,7 @@ def test_negative_case():
 
 
 def test_exception_case():
-    with patch("requests.get") as fake_get:
-        fake_get.return_value.text = ValueError
-        try:
+    with patch("requests.get", side_effect=ConnectionError) as fake_get:
+        fake_get.return_value.text = 'asdf'
+        with pytest.raises(ValueError):
             count_dots_on_i("https://example.com")
-        except Exception:
-            assert ValueError

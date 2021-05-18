@@ -15,7 +15,8 @@ def test_positive():
 
 
 def test_negative():
-    """Testing that val1 after cache function and val2 = func(*some) is not same"""
+    """Testing that val1 after cache function
+    and val2 = func(*some) is not same"""
 
     def func(a, b):
         return (a ** b) ** 2

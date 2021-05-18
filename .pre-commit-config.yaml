@@ -18,10 +18,10 @@ repos:
     rev: 5.8.0
     hooks:
       - id: isort
-  - repo: 'https://github.com/psf/black'
-    rev: 19.10b0
+  - repo: 'https://gitlab.com/pycqa/flake8'
+    rev: 3.7.9
     hooks:
-      - id: black
+      - id: flake8
   - repo: local
     hooks:
       - id: pytest-check
@@ -29,5 +29,5 @@ repos:
         entry: pytest
         language: python
         pass_filenames: false
-        additional_dependencies: [pre-commit, pytest]
+        additional_dependencies: [pre-commit, pytest, requests]
         always_run: true

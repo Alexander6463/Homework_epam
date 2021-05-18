@@ -12,7 +12,6 @@ from typing import List
 
 def get_longest_diverse_words(file_path: str) -> List[str]:
     dict_words = dict()
-    result_list = list()
     with open(file_path, "r", encoding="unicode-escape") as f:
         text = f.read().split("\n")
     new_text = str()

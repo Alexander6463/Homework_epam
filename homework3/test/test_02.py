@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-from homework3.hw.task02 import *
+from homework3.hw.task02 import multiprocessing_calculate, slow_calculate
 
 
 def test_multiprocessing_calculate_time_and_value():

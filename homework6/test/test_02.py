@@ -17,10 +17,6 @@ def test_homework_result_type_error():
         HomeworkResult(good_student, "fff", "Solution")
 
 
-def test_teacher_is_subcluss_student():
-    assert issubclass(Teacher, Student)
-
-
 def test_lazy_student_not_in_homework_done_dict():
     opp_teacher = Teacher("Daniil", "Shadrin")
     lazy_student = Student("Roman", "Petrov")

@@ -47,12 +47,17 @@ class DeadlineError(Exception):
     pass
 
 
+class Human:
+    def __init__(self, first_name, last_name):
+        self.first_name = first_name
+        self.last_name = last_name
+
+
 class HomeworkResult:
     def __init__(self, student, homework, solve):
         if not isinstance(homework, Homework):
             raise TypeError("You gave a not Homework object")
         self.homework = homework
-        self.task = homework.text
         self.solution = solve
         self.author = student
         self.created = datetime.datetime.now()
@@ -64,22 +69,19 @@ class Homework:
         self.deadline = datetime.timedelta(deadline_days)
         self.created = datetime.datetime.now()
 
-    def is_deadline(self):
-        return datetime.datetime.now() >= (self.created + self.deadline)
+    def is_active(self):
+        return datetime.datetime.now() < (self.created + self.deadline)
 
 
-class Student:
-    def __init__(self, name, first_name):
-        self.last_name = name
-        self.first_name = first_name
-
+class Student(Human):
     def do_homework(self, homework, result):
-        if homework.is_deadline():
+        if homework.is_active():
+            return HomeworkResult(self, homework, result)
+        else:
             raise DeadlineError("You are late")
-        return HomeworkResult(self, homework, result)
 
 
-class Teacher(Student):
+class Teacher(Human):
     homework_done = defaultdict(set)
 
     @staticmethod

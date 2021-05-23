@@ -15,8 +15,8 @@ def instances_counter(cls):
     class Wrapper(cls):
         cls.counter = 0
 
-        @classmethod
-        def __init__(cls):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
             cls.counter += 1
 
         @classmethod
@@ -32,13 +32,17 @@ def instances_counter(cls):
 
 @instances_counter
 class User:
-    pass
+    def __init__(self, first_name):
+        self.first_name = first_name
+
+    def get_name(self):
+        return self.first_name
 
 
 if __name__ == "__main__":
 
     print(User.get_created_instances())  # 0
-    user, _, _ = User(), User(), User()
-    print(user.get_created_instances())  # 3
+    user, _, _ = User('Petr'), User('Sasha'), User('Nikolay')
+    print(user.get_created_instances(), user.get_name())  # 3
     user.reset_instances_counter()  # 3
     print(user.get_created_instances())

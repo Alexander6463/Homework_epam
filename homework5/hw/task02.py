@@ -37,7 +37,6 @@ def custom_sum(*args):
     return functools.reduce(lambda x, y: x + y, args)
 
 
-"""
 if __name__ == "__main__":
     custom_sum([1, 2, 3], [4, 5])
     custom_sum(1, 2, 3, 4)
@@ -47,4 +46,3 @@ if __name__ == "__main__":
     without_print = custom_sum.__original_func
     # the result returns without printing
     without_print(1, 2, 3, 4)
-"""

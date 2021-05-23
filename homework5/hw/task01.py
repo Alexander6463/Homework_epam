@@ -42,27 +42,27 @@ class Homework:
         self.deadline = datetime.timedelta(deadline_days)
         self.created = datetime.datetime.now()
 
-    def is_deadline(self):
+    def is_active(self):
         return datetime.datetime.now() >= (self.created + self.deadline)
 
 
 class Student:
-    def __init__(self, name, first_name):
-        self.last_name = name
+    def __init__(self, first_name, last_name):
         self.first_name = first_name
+        self.last_name = last_name
 
     @staticmethod
     def do_homework(homework):
-        if homework.is_deadline():
+        if homework.is_active():
             print("You are late")
             return None
         return homework
 
 
 class Teacher:
-    def __init__(self, name, first_name):
-        self.last_name = name
+    def __init__(self, first_name, last_name):
         self.first_name = first_name
+        self.last_name = last_name
 
     @staticmethod
     def create_homework(text, days):
@@ -72,8 +72,8 @@ class Teacher:
 if __name__ == '__main__':
     teacher = Teacher('Daniil', 'Shadrin')
     student = Student('Roman', 'Petrov')
-    teacher.last_name  # Daniil
-    student.first_name  # Petrov
+    teacher.first_name  # Daniil
+    student.last_name  # Petrov
 
     expired_homework = teacher.create_homework('Learn functions', 0)
     expired_homework.created  # Example: 2019-05-26 16:44:30.688762

@@ -1,18 +1,18 @@
 import datetime
 
-from homework5.hw.task01 import Student, Teacher
+from homework5.hw.task01 import Homework, Student, Teacher
 
 
 def test_names_in_class_teacher():
     teacher = Teacher("Daniil", "Shadrin")
-    assert teacher.last_name == "Daniil"
-    assert teacher.first_name == "Shadrin"
+    assert teacher.first_name == "Daniil"
+    assert teacher.last_name == "Shadrin"
 
 
 def test_names_in_class_student():
     student = Student("Roman", "Petrov")
-    assert student.first_name == "Petrov"
-    assert student.last_name == "Roman"
+    assert student.first_name == "Roman"
+    assert student.last_name == "Petrov"
 
 
 def test_attrs_class_homework_and_method_create_homework():
@@ -20,6 +20,7 @@ def test_attrs_class_homework_and_method_create_homework():
     expired_homework = teacher.create_homework("Learn functions", 0)
     assert expired_homework.deadline == datetime.timedelta(0)
     assert expired_homework.text == "Learn functions"
+    assert isinstance(expired_homework, Homework)
 
 
 def test_method_do_homework_from_class_student():

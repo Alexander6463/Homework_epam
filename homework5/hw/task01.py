@@ -43,7 +43,7 @@ class Homework:
         self.created = datetime.datetime.now()
 
     def is_active(self):
-        return datetime.datetime.now() >= (self.created + self.deadline)
+        return datetime.datetime.now() < (self.created + self.deadline)
 
 
 class Student:
@@ -54,9 +54,10 @@ class Student:
     @staticmethod
     def do_homework(homework):
         if homework.is_active():
+            return homework
+        else:
             print("You are late")
             return None
-        return homework
 
 
 class Teacher:

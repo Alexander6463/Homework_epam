@@ -14,21 +14,31 @@ In case when value cannot be assigned to an attribute
 (for example when there's a line 1=something)
 ValueError should be raised. File size is expected to be small,
 you are permitted to read it entirely into memory.'''
+from keyword import iskeyword
 
 
-class KeyValueStorage(dict):
-
+class KeyValueStorage:
     def __init__(self, path):
-        super().__init__()
+        self.items = dict()
         with open(path, 'r') as f:
-            text = f.read()
-        for line in text.split():
-            key, value = line.split('=')
-            if key.isnumeric():
-                raise ValueError
-            elif value.isnumeric():
-                self.__setattr__(key, int(value))
-                self.__setitem__(key, int(value))
+            self.text = f.read()
+        for line in self.text.split('\n'):
+            key, value = self.split_line(line)
+            if value.isnumeric():
+                self.items[key] = int(value)
             else:
-                self.__setattr__(key, value)
-                self.__setitem__(key, value)
+                self.items[key] = value
+
+    def split_line(self, line):
+        key, value = line.split('=')
+        if not key.isidentifier() or iskeyword(key):
+            raise ValueError('This name cannot be used as variable name')
+        else:
+            if key not in self.__dir__():
+                return key, value
+
+    def __getitem__(self, item):
+        return self.items[item]
+
+    def __getattr__(self, item):
+        return self.items[item]

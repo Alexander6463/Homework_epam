@@ -22,35 +22,57 @@ import sqlite3
 
 class TableData:
     def __init__(self, path, table_name):
-        self.conn = sqlite3.connect(path)
-        self.conn.row_factory = sqlite3.Row
-        self.cursor = self.conn.cursor()
+        self.path = path
         self.table_name = table_name
 
+    def connection_to_database(self):
+        conn = sqlite3.connect(self.path)
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        return cursor, conn
+
+    @staticmethod
+    def close_connection(cursor, conn):
+        cursor.close()
+        conn.close()
+
     def __getitem__(self, item):
-        self.cursor.execute(f'SELECT * from {self.table_name} where name=?',
-                            (item,))
-        return tuple(self.cursor.fetchone())
+        cursor, con = self.connection_to_database()
+        cursor.execute(f'SELECT * from {self.table_name} where name=?',
+                       (item,))
+        res = tuple(cursor.fetchone())
+        self.close_connection(cursor, con)
+        return res
 
     def __len__(self):
-        self.cursor.execute(f'SELECT count(*) from {self.table_name}')
-        return self.cursor.fetchone()[0]
+        cursor, con = self.connection_to_database()
+        cursor.execute(f'SELECT count(*) from {self.table_name}')
+        res = cursor.fetchone()[0]
+        self.close_connection(cursor, con)
+        return res
 
     def __contains__(self, item):
-        self.cursor.execute(f'SELECT * from {self.table_name} where name=?',
-                            (item,))
-        if self.cursor.fetchone() is not None:
+        cursor, con = self.connection_to_database()
+        cursor.execute(f'SELECT * from {self.table_name} where name=?',
+                       (item,))
+        res = cursor.fetchone()
+        self.close_connection(cursor, con)
+        if res is not None:
             return True
         return False
 
     def __iter__(self):
-        self.cursor.execute(f'SELECT * from {self.table_name}')
+        cursor, con = self.connection_to_database()
+        cursor.execute(f'SELECT * from {self.table_name}')
+        self.close_connection(cursor, con)
         return self
 
     def __next__(self):
-        self.res = self.cursor.fetchone()
-        if self.res is not None:
-            return self.res
+        cursor, con = self.connection_to_database()
+        res = cursor.fetchone()
+        self.close_connection(cursor, con)
+        if res is not None:
+            return res
         else:
             raise StopIteration
 

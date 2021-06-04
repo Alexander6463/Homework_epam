@@ -3,7 +3,7 @@ import os
 from sqlalchemy import create_engine, inspect
 from sqlalchemy.orm import sessionmaker
 
-from homework10.hw.create_table import Homework, Student, Teacher
+from homework10.hw.models import Homework, Student, Teacher
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 db_path = os.path.join(BASE_DIR, "main.db")
@@ -22,8 +22,9 @@ def close_connection(session):
 def test_created_tables():
     engine, session = create_connection()
     inspector = inspect(engine)
-    assert inspector.get_table_names() == ['Result', 'homeworks',
-                                           'students', 'teachers']
+    assert inspector.get_table_names() == ['Result', 'alembic_version',
+                                           'homeworks', 'students',
+                                           'teachers']
     close_connection(session)
 
 

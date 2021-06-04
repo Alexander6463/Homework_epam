@@ -4,14 +4,14 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
 engine = create_engine('sqlite:///main.db')
-base = declarative_base()
+Base = declarative_base()
 
 
-class Student(base):
+class Student(Base):
     __tablename__ = 'students'
     id = Column(Integer, primary_key=True)
-    first_name = Column(String)
-    last_name = Column(String)
+    first_name = Column(String, nullable=False)
+    last_name = Column(String, nullable=False)
     result = relationship('ResultHomework')
 
     def __repr__(self):
@@ -19,11 +19,11 @@ class Student(base):
                f'last_name={self.last_name}'
 
 
-class Teacher(base):
+class Teacher(Base):
     __tablename__ = 'teachers'
     id = Column(Integer, primary_key=True)
-    first_name = Column(String)
-    last_name = Column(String)
+    first_name = Column(String, nullable=False)
+    last_name = Column(String, nullable=False)
     result = relationship('ResultHomework')
 
     def __repr__(self):
@@ -31,12 +31,12 @@ class Teacher(base):
                f'last_name={self.last_name}'
 
 
-class Homework(base):
+class Homework(Base):
     __tablename__ = 'homeworks'
     id = Column(Integer, primary_key=True)
-    text = Column(String)
-    deadline = Column(DateTime)
-    created = Column(DateTime)
+    text = Column(String, nullable=False)
+    deadline = Column(DateTime, nullable=False)
+    created = Column(DateTime, nullable=False)
     result = relationship('ResultHomework')
 
     def __repr__(self):
@@ -44,14 +44,14 @@ class Homework(base):
                f'created = {self.created}'
 
 
-class ResultHomework(base):
+class ResultHomework(Base):
     __tablename__ = 'Result'
     id = Column(Integer, primary_key=True)
-    homework_id = Column(Integer, ForeignKey('homeworks.id'))
-    teacher_id = Column(Integer, ForeignKey('teachers.id'))
-    student_id = Column(Integer, ForeignKey('students.id'))
-    solve = Column(String)
-    created = Column(DateTime)
+    homework_id = Column(Integer, ForeignKey('homeworks.id'), nullable=False)
+    teacher_id = Column(Integer, ForeignKey('teachers.id'), nullable=False)
+    student_id = Column(Integer, ForeignKey('students.id'), nullable=False)
+    solve = Column(String, nullable=False)
+    created = Column(DateTime, nullable=False)
 
     def __repr__(self):
         return f'ResultHomework homework={self.homework_id}, ' \
@@ -60,4 +60,4 @@ class ResultHomework(base):
 
 
 if __name__ == '__main__':
-    base.metadata.create_all(engine)
+    Base.metadata.create_all(engine)

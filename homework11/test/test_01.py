@@ -1,42 +1,57 @@
 import json
+from unittest.mock import AsyncMock
 
 import pytest
 
-from homework11.hw.task01 import MakeReport
+from homework11.hw.task01 import CompanyRepository, MakeReport
 
 
 @pytest.fixture()
-def data_input():
+async def input_data():
     with open("homework11/test/data_file.json", "r", encoding='utf-8') \
             as read_file:
         data = json.load(read_file)
-        return data
+    company = CompanyRepository()
+    company.get_info_companies = AsyncMock(return_value=data)
+    return await company.get_info_companies()
 
 
-def test_pe_max_report(data_input):
-    assert json.loads(MakeReport(data_input, 71.85).get_p_e_report())[0] \
-           == {'code': 'VNO',
-               'name': 'Vornado Realty Trust',
-               'P/E': -893.45}
+@pytest.fixture()
+async def get_cost_of_dollar():
+    company = CompanyRepository()
+    company.get_current_value_dollar = AsyncMock(return_value=71.85)
+    return await company.get_current_value_dollar()
 
 
-def test_cost_max_report(data_input):
-    assert json.loads(MakeReport(data_input, 71.85).get_cost_report())[0] \
-           == {'code': 'AMZN',
-               'name': 'Amazon',
-               'price': 238932.86}
+@pytest.mark.asyncio
+async def test_pe_max_report(input_data, get_cost_of_dollar):
+    assert await json.loads(
+        MakeReport(input_data, get_cost_of_dollar).
+        get_p_e_report())[0] == {'code': 'VNO',
+                                 'name': 'Vornado Realty Trust',
+                                 'P/E': -893.45}
 
 
-def test_growth_max_report(data_input):
-    assert json.loads(MakeReport(data_input, 71.85).get_growth_report())[0]\
-           == {'code': 'LB',
-               'name': 'L Brands Inc',
-               'growth': 347.65}
+@pytest.mark.asyncio
+async def test_cost_max_report(input_data, get_cost_of_dollar):
+    assert await json.loads(MakeReport(input_data, get_cost_of_dollar).
+                            get_cost_report())[0] == {'code': 'AMZN',
+                                                      'name': 'Amazon',
+                                                      'price': 238932.86}
 
 
-def test_potential_profit_max_report(data_input):
-    assert json.loads(MakeReport(data_input, 71.85).
-                      get_potential_profit_report())[0] \
+@pytest.mark.asyncio
+async def test_growth_max_report(input_data, get_cost_of_dollar):
+    assert await json.loads(MakeReport(input_data, get_cost_of_dollar).
+                            get_growth_report())[0] == {'code': 'LB',
+                                                        'name': 'L Brands Inc',
+                                                        'growth': 347.65}
+
+
+@pytest.mark.asyncio
+async def test_potential_profit_max_report(input_data, get_cost_of_dollar):
+    assert await json.loads(MakeReport(input_data, get_cost_of_dollar).
+                            get_potential_profit_report())[0] \
            == {'code': 'GOOG',
                'name': 'Alphabet C (ex Google)',
                'potential profit': 84235.5}

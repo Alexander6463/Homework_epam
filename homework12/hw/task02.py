@@ -27,9 +27,6 @@ class Order:
         self.strategy = strategy
         self.discount = float()
 
-    def set_strategy(self, strategy):
-        self.strategy = strategy
-
     def final_price(self):
         self.strategy(self)
         return int(self.price - self.price * self.discount)

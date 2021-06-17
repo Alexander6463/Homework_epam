@@ -39,8 +39,3 @@ class ColorsEnum(metaclass=SimplifiedEnum):
 
 class SizesEnum(metaclass=SimplifiedEnum):
     __keys = ("XL", "L", "M", "S", "XS")
-
-
-if __name__ == '__main__':
-    a = ColorsEnum()
-    print(a.RED, a.BLUE, a.ORANGE, a.BLACK, SizesEnum.XL, a.BROWN)

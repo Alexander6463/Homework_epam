@@ -41,11 +41,3 @@ def morning_discount(order):
 
 def elder_discount(order):
     order.discount = 0.9
-
-
-if __name__ == '__main__':
-    order_1 = Order(100, morning_discount)
-    print(order_1.final_price())
-
-    order_2 = Order(100, elder_discount)
-    print(order_2.final_price())

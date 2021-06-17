@@ -162,8 +162,7 @@ class MakeReport:
                 {'code': company.link.upper(),
                  'name': company.name,
                  'price': round(company.cost * self.cost_dollar, 2)})
-        with open('cost_report.json', 'w') as outfile:
-            json.dump(res_json, outfile)
+        return res_json
 
     def get_p_e_report(self):
         res_json = list()
@@ -173,8 +172,7 @@ class MakeReport:
             res_json.append({'code': company.link.upper(),
                              'name': company.name,
                              'P/E': company.pe_index})
-        with open('p_e_report.json', 'w') as outfile:
-            json.dump(res_json, outfile)
+        return res_json
 
     def get_growth_report(self):
         res_json = list()
@@ -185,8 +183,7 @@ class MakeReport:
             res_json.append({'code': company.link.upper(),
                              'name': company.name,
                              'growth': company.growth})
-        with open('growth_report.json', 'w') as outfile:
-            json.dump(res_json, outfile)
+        return res_json
 
     def get_potential_profit_report(self):
         res_json = list()
@@ -198,10 +195,14 @@ class MakeReport:
                                  round((company.week_high_52 -
                                         company.week_low_52) *
                                        self.cost_dollar, 2)})
-        with open('potential_profit_report.json', 'w') as outfile:
-            json.dump(sorted(res_json,
-                             key=lambda i: i['potential profit'],
-                             reverse=True)[0:10], outfile)
+        return sorted(res_json,
+                      key=lambda i: i['potential profit'],
+                      reverse=True)[0:10]
+
+    @staticmethod
+    def save_report_into_json_file(data, name_of_file):
+        with open(name_of_file, 'w') as outfile:
+            json.dump(data, outfile)
 
 
 async def main():
